@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import 'dotenv/config';
 import mongoose from 'mongoose';
@@ -28,7 +28,9 @@ app.use('/api/order/checkout/webhook', express.raw({ type: '*/*' }));
 
 app.use(express.json());
 
-// health endpoint here.
+app.get('/health', async (req: Request, res: Response) => {
+  res.send({ message: 'health OK!' });
+});
 
 app.use('/api/my/user', myUserRoot);
 app.use('/api/my/restaurant', myRestaurantRoute);
