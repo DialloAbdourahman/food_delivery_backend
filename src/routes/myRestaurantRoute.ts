@@ -19,7 +19,7 @@ router.get('/', jwtCheck, jwtParse, myRestaurantController.getMyRestaurant);
 router.post(
   '/',
   upload.single('imageFile'),
-  // validateMyRestaurantRequest,
+  validateMyRestaurantRequest,
   jwtCheck,
   jwtParse,
   myRestaurantController.createMyRestaurant

@@ -4,6 +4,8 @@ import 'dotenv/config';
 import mongoose from 'mongoose';
 import myUserRoot from './routes/myUserRoute';
 import myRestaurantRoute from './routes/myRestaurantRoute';
+import restaurantRoute from './routes/restaurantRoute';
+import orderRoute from './routes/orderRoute';
 import { v2 as cloudinary } from 'cloudinary';
 
 mongoose
@@ -19,11 +21,19 @@ cloudinary.config({
 
 const app = express();
 
-app.use(express.json());
 app.use(cors());
+
+// For stripe because it needs the raw data not the json data.
+app.use('/api/order/checkout/webhook', express.raw({ type: '*/*' }));
+
+app.use(express.json());
+
+// health endpoint here.
 
 app.use('/api/my/user', myUserRoot);
 app.use('/api/my/restaurant', myRestaurantRoute);
+app.use('/api/restaurants', restaurantRoute);
+app.use('/api/order', orderRoute);
 
 app.listen(7000, () => {
   console.log('Server started on localhost:7000');
