@@ -5,7 +5,9 @@
   "main": "./src/index.ts",
   "scripts": {
     "dev": "concurrently \"nodemon\" \"npm run stripe\"",
-    "stripe": "stripe listen --forward-to localhost:7000/api/order/checkout/webhook"
+    "stripe": "stripe listen --forward-to localhost:7000/api/order/checkout/webhook",
+    "start": "node dist/index.js",
+    "build": "npm install && npx tsc"
   },
   "author": "",
   "license": "ISC",
